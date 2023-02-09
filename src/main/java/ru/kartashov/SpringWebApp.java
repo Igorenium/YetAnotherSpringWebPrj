@@ -1,13 +1,16 @@
 package ru.kartashov;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.kartashov.model.TestModel;
+import ru.kartashov.model.Music;
 
 public class SpringWebApp {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-        TestModel model = context.getBean("testModel", TestModel.class);
-        System.out.println(model.getName());
+
+        Music music = context.getBean("musicBean", Music.class);
+        new MusicPlayer(music).playMusic();
+
+        context.close();
     }
 }
