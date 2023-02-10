@@ -8,4 +8,8 @@
           class="ru.kartashov.model.RockMusic">
     </bean>
 
+    <bean id="musicPlayer"
+          class="ru.kartashov.MusicPlayer">
+        <constructor-arg ref="musicBean"/>
+    </bean>
 </beans>
