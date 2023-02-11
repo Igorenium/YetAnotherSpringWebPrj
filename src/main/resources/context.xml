@@ -7,13 +7,26 @@
 
     <context:property-placeholder location="classpath:SpringWebApp.properties"/>
 
-    <bean id="musicBean"
+    <bean id="rockMusicBean"
           class="ru.kartashov.model.RockMusic">
     </bean>
 
-    <bean id="musicPlayer"
-          class="ru.kartashov.MusicPlayer">
-        <property name="music" ref="musicBean"/>
+    <bean id="classicalMusicBean"
+          class="ru.kartashov.model.ClassicalMusic">
+    </bean>
+
+    <bean id="chansonMusicBean"
+          class="ru.kartashov.model.ChansonMusic">
+    </bean>
+
+    <bean id="musicPlayer" class="ru.kartashov.MusicPlayer">
+        <property name="musicList">
+            <list>
+                <ref bean="rockMusicBean"/>
+                <ref bean="classicalMusicBean"/>
+                <ref bean="chansonMusicBean"/>
+            </list>
+        </property>
         <property name="name" value="${musicPlayer.name}"/>
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>

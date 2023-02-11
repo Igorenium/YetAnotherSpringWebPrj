@@ -2,15 +2,18 @@ package ru.kartashov;
 
 import ru.kartashov.model.Music;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MusicPlayer {
 
-    private Music music;
+    private List<Music> musicList = new ArrayList<>();
 
     private String name;
     private int volume;
 
-    public void setMusic(Music music) {
-        this.music = music;
+    public void setMusicList(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public void setName(String name) {
@@ -30,6 +33,6 @@ public class MusicPlayer {
     }
 
     public void playMusic() {
-        System.out.println("Playing " + music.getSong());
+        musicList.forEach(m -> System.out.println("Playing " + m.getSong()));
     }
 }
