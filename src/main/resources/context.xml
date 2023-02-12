@@ -8,18 +8,31 @@
     <context:property-placeholder location="classpath:SpringWebApp.properties"/>
 
     <bean id="rockMusicBean"
-          class="ru.kartashov.model.RockMusic">
+          scope="prototype"
+          class="ru.kartashov.model.RockMusic"
+          init-method="init"
+          factory-method="getRockMusic"
+          destroy-method="destroy">
     </bean>
 
     <bean id="classicalMusicBean"
-          class="ru.kartashov.model.ClassicalMusic">
+          class="ru.kartashov.model.ClassicalMusic"
+          init-method="init"
+          factory-method="getClassicalMusic"
+          destroy-method="destroy">
     </bean>
 
     <bean id="chansonMusicBean"
-          class="ru.kartashov.model.ChansonMusic">
+          class="ru.kartashov.model.ChansonMusic"
+          init-method="init"
+          factory-method="getChansonMusic"
+          destroy-method="destroy">
     </bean>
 
-    <bean id="musicPlayer" class="ru.kartashov.MusicPlayer" scope="prototype">
+    <bean id="musicPlayer"
+          class="ru.kartashov.MusicPlayer"
+          init-method="init"
+          destroy-method="destroy">
         <property name="musicList">
             <list>
                 <ref bean="rockMusicBean"/>

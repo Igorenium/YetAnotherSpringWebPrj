@@ -12,8 +12,17 @@ public class MusicPlayer {
     private String name;
     private int volume;
 
+    public MusicPlayer() {
+        System.out.println("We are inside the constructor of MusicPlayer class");
+    }
+
+    public void init() {
+        System.out.println("We are inside the init method of MusicPlayer class");
+    }
+
     public void setMusicList(List<Music> musicList) {
         this.musicList = musicList;
+        System.out.println("We are setting musicList field");
     }
 
     public void setName(String name) {
@@ -34,5 +43,9 @@ public class MusicPlayer {
 
     public void playMusic() {
         musicList.forEach(m -> System.out.println("Playing " + m.getSong()));
+    }
+
+    public void destroy() {
+        System.out.println("We are inside the destroy method of MusicPlayer class");
     }
 }
