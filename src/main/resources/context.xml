@@ -19,7 +19,7 @@
           class="ru.kartashov.model.ChansonMusic">
     </bean>
 
-    <bean id="musicPlayer" class="ru.kartashov.MusicPlayer">
+    <bean id="musicPlayer" class="ru.kartashov.MusicPlayer" scope="prototype">
         <property name="musicList">
             <list>
                 <ref bean="rockMusicBean"/>
