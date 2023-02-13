@@ -5,42 +5,5 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:SpringWebApp.properties"/>
-
-    <bean id="rockMusicBean"
-          scope="prototype"
-          class="ru.kartashov.model.RockMusic"
-          init-method="init"
-          factory-method="getRockMusic"
-          destroy-method="destroy">
-    </bean>
-
-    <bean id="classicalMusicBean"
-          class="ru.kartashov.model.ClassicalMusic"
-          init-method="init"
-          factory-method="getClassicalMusic"
-          destroy-method="destroy">
-    </bean>
-
-    <bean id="chansonMusicBean"
-          class="ru.kartashov.model.ChansonMusic"
-          init-method="init"
-          factory-method="getChansonMusic"
-          destroy-method="destroy">
-    </bean>
-
-    <bean id="musicPlayer"
-          class="ru.kartashov.MusicPlayer"
-          init-method="init"
-          destroy-method="destroy">
-        <property name="musicList">
-            <list>
-                <ref bean="rockMusicBean"/>
-                <ref bean="classicalMusicBean"/>
-                <ref bean="chansonMusicBean"/>
-            </list>
-        </property>
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+    <context:component-scan base-package="ru.kartashov"/>
 </beans>
