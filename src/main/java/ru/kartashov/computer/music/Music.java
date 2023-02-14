@@ -1,4 +1,4 @@
-package ru.kartashov.model;
+package ru.kartashov.computer.music;
 
 public interface Music {
 
