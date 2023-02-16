@@ -3,7 +3,6 @@ package ru.kartashov.computer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kartashov.computer.music.MusicPlayer;
-import ru.kartashov.computer.music.MusicType;
 
 @Component
 public class Computer {
@@ -19,6 +18,6 @@ public class Computer {
 
     @Override
     public String toString() {
-        return "Computer " + id + " doing job: " + musicPlayer.playMusic(MusicType.ROCK);
+        return "Computer " + id + " doing job: " + musicPlayer.playMusic();
     }
 }

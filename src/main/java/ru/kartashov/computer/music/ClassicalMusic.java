@@ -1,25 +1,33 @@
 package ru.kartashov.computer.music;
 
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Component
+@Primary
+@Scope("singleton")
 public class ClassicalMusic implements Music {
 
-    private final List<String> songs;
+    public ClassicalMusic() {
+        System.out.println("Inside CONSTRUCTOR of ClassicalMusic bean");
+    }
 
-    {
-        songs = new ArrayList<>();
-        songs.add("Vivaldi Summer");
-        songs.add("Vivaldi Winter");
-        songs.add("Vivaldi Autumn");
-        songs.add("Vivaldi Spring");
+    @PostConstruct
+    private void init() {
+        System.out.println("Inside INIT method of ClassicalMusic bean");
     }
 
     @Override
-    public List<String> getSongs() {
-        return songs;
+    public String getSong() {
+        return "Vivaldi";
+    }
+
+    @PreDestroy
+    private void destroy() {
+        System.out.println("Inside DESTROY method of ClassicalMusic bean");
     }
 }

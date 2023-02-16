@@ -1,25 +1,31 @@
 package ru.kartashov.computer.music;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Component
+@Scope("prototype")
 public class RockMusic implements Music {
 
-    private final List<String> songs;
+    public RockMusic() {
+        System.out.println("Inside CONSTRUCTOR of RockMusic bean");
+    }
 
-    {
-        songs = new ArrayList<>();
-        songs.add("AC DC TNT");
-        songs.add("AC DC Shoot to thrill");
-        songs.add("AC DC Thunder");
-        songs.add("AC DC Black in black");
+    @PostConstruct
+    private void init() {
+        System.out.println("Inside INIT method of RockMusic bean");
     }
 
     @Override
-    public List<String> getSongs() {
-        return songs;
+    public String getSong() {
+        return "Цой";
+    }
+
+    @PreDestroy
+    private void destroy() {
+        System.out.println("Inside DESTROY method of RockMusic bean");
     }
 }
