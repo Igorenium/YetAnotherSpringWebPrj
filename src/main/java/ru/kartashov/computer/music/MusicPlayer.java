@@ -2,6 +2,9 @@ package ru.kartashov.computer.music;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.List;
+import java.util.Random;
+
 public class MusicPlayer {
 
     @Value("${musicPlayer.name}")
@@ -9,10 +12,10 @@ public class MusicPlayer {
     @Value("${musicPlayer.volume}")
     private int volume;
 
-    private final Music music;
+    private final List<Music> musicList;
 
-    public MusicPlayer(Music music) {
-        this.music = music;
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public String getName() {
@@ -24,6 +27,6 @@ public class MusicPlayer {
     }
 
     public String playMusic() {
-        return "Playing " + music.getSong();
+        return "Playing " + musicList.get(new Random().nextInt(musicList.size())).getSong();
     }
 }

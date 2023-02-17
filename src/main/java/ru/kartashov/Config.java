@@ -9,6 +9,9 @@ import ru.kartashov.computer.music.Music;
 import ru.kartashov.computer.music.MusicPlayer;
 import ru.kartashov.computer.music.RockMusic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @ComponentScan("ru.kartashov")
 @PropertySource("classpath:SpringWebApp.properties")
@@ -25,7 +28,15 @@ public class Config {
     }
 
     @Bean
+    public List<Music> musicList() {
+        List<Music> musicList = new ArrayList<>();
+        musicList.add(classicalMusic());
+        musicList.add(rockMusic());
+        return musicList;
+    }
+
+    @Bean
     public MusicPlayer musicPlayer() {
-        return new MusicPlayer(classicalMusic());
+        return new MusicPlayer(musicList());
     }
 }
