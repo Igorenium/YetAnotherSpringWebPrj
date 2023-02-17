@@ -1,13 +1,13 @@
 package ru.kartashov;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ru.kartashov.computer.music.Music;
 import ru.kartashov.computer.music.MusicPlayer;
 
 public class SpringWebApp {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
         MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
         System.out.println(musicPlayer.playMusic());
