@@ -5,9 +5,10 @@
     <title>Person</title>
 </head>
 <body>
-
-<p th:text="${person.getName()}">cred</p>
-<p th:text="${person.getId()}">cred</p>
-
+    Name: <output th:text="${person.getName()}">cred</output>
+    <br>
+    Email: <output th:text="${person.getEmail()}">cred</output>
+    <br>
+    Instagram: <output th:text="${person.getInstagram()}">cred</output>
 </body>
 </html>

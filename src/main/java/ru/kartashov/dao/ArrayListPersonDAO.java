@@ -18,11 +18,11 @@ public class ArrayListPersonDAO implements PersonDAO {
         this.idGenerator = idGenerator;
 
         people = new ArrayList<>();
-        people.add(new Person(idGenerator.next(), "Ann"));
-        people.add(new Person(idGenerator.next(), "Boris"));
-        people.add(new Person(idGenerator.next(), "Nick"));
-        people.add(new Person(idGenerator.next(), "Fed"));
-        people.add(new Person(idGenerator.next(), "Van"));
+        people.add(new Person(idGenerator.next(), "Ann", "ann@mail.ru", "@annone"));
+        people.add(new Person(idGenerator.next(), "Boris", "boris@mail.ru", "@boristwo"));
+        people.add(new Person(idGenerator.next(), "Nick", "nick@mail.ru", "@nickthree"));
+        people.add(new Person(idGenerator.next(), "Kristina", "kris_fom_93@yandex.tu", "@kristinfour"));
+        people.add(new Person(idGenerator.next(), "Van", "van@mail.ru", "@vanfive"));
     }
 
     @Override
