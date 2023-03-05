@@ -11,4 +11,6 @@ public interface PersonDAO {
     Person getPerson(int id);
 
     void save(Person person);
+
+    void update(int id, Person person);
 }

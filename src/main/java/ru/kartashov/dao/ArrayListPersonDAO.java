@@ -40,4 +40,12 @@ public class ArrayListPersonDAO implements PersonDAO {
         person.setId(idGenerator.next());
         people.add(person);
     }
+
+    @Override
+    public void update(int id, Person refPerson) {
+        Person updatedPerson = getPerson(id);
+        updatedPerson.setName(refPerson.getName());
+        updatedPerson.setEmail(refPerson.getEmail());
+        updatedPerson.setInstagram(refPerson.getInstagram());
+    }
 }
