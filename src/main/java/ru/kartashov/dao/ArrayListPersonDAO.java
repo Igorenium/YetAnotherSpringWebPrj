@@ -48,4 +48,9 @@ public class ArrayListPersonDAO implements PersonDAO {
         updatedPerson.setEmail(refPerson.getEmail());
         updatedPerson.setInstagram(refPerson.getInstagram());
     }
+
+    @Override
+    public void delete(int id) {
+        people.removeIf(p -> p.getId() == id);
+    }
 }
