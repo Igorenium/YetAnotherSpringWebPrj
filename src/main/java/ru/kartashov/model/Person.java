@@ -1,20 +1,30 @@
 package ru.kartashov.model;
 
+import javax.validation.constraints.*;
+
 public class Person {
 
     private int id;
+
+    @NotBlank( message = "Name shouldn't be blanc")
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
     private String name;
+
+    @NotBlank(message = "Email shouldn't be blanc")
+    @Email(message = "Email should be correct")
     private String email;
-    private String instagram;
+
+    @Min(value = 0, message = "Age should be greater than 0")
+    private int age;
 
     public Person() {
     }
 
-    public Person(int id, String name, String email, String instagram) {
+    public Person(int id, String name, String email, int age) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.instagram = instagram;
+        this.age = age;
     }
 
     public void setId(int id) {
@@ -29,8 +39,8 @@ public class Person {
         this.email = email;
     }
 
-    public void setInstagram(String instagram) {
-        this.instagram = instagram;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getId() {
@@ -45,7 +55,7 @@ public class Person {
         return email;
     }
 
-    public String getInstagram() {
-        return instagram;
+    public int getAge() {
+        return age;
     }
 }

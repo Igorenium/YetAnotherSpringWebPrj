@@ -18,11 +18,11 @@ public class ArrayListPersonDAO implements PersonDAO {
         this.idGenerator = idGenerator;
 
         people = new ArrayList<>();
-        people.add(new Person(idGenerator.next(), "Ann", "ann@mail.ru", "@annone"));
-        people.add(new Person(idGenerator.next(), "Boris", "boris@mail.ru", "@boristwo"));
-        people.add(new Person(idGenerator.next(), "Nick", "nick@mail.ru", "@nickthree"));
-        people.add(new Person(idGenerator.next(), "Kristina", "kris_fom_93@yandex.tu", "@kristinfour"));
-        people.add(new Person(idGenerator.next(), "Van", "van@mail.ru", "@vanfive"));
+        people.add(new Person(idGenerator.next(), "Ann", "ann@mail.ru", 10));
+        people.add(new Person(idGenerator.next(), "Boris", "boris@mail.ru", 20));
+        people.add(new Person(idGenerator.next(), "Nick", "nick@mail.ru", 30));
+        people.add(new Person(idGenerator.next(), "Kristina", "kris_fom_93@yandex.tu", 29));
+        people.add(new Person(idGenerator.next(), "Van", "van@mail.ru", 40));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ArrayListPersonDAO implements PersonDAO {
         Person updatedPerson = getPerson(id);
         updatedPerson.setName(refPerson.getName());
         updatedPerson.setEmail(refPerson.getEmail());
-        updatedPerson.setInstagram(refPerson.getInstagram());
+        updatedPerson.setAge(refPerson.getAge());
     }
 
     @Override

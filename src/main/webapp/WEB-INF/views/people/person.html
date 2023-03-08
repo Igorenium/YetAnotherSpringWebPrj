@@ -9,7 +9,7 @@
     <br>
     Email: <output th:text="${person.getEmail()}">cred</output>
     <br>
-    Instagram: <output th:text="${person.getInstagram()}">cred</output>
+    Age: <output th:text="${person.getAge()}">cred</output>
     <br>
     <a th:href="@{/people/{id}/edit(id=${person.getId()})}">Edit profile</a>
     <hr>
