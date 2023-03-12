@@ -1,5 +1,6 @@
 package ru.kartashov.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,7 @@ public class PeopleController {
 
     private final PersonDAO personDAO;
 
-    public PeopleController(PersonDAO personDAO) {
+public PeopleController(@Qualifier("DBPersonDAO") PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
