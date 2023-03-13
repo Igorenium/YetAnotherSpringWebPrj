@@ -4,10 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.kartashov.dao.generator.IdGenerator;
 import ru.kartashov.model.Person;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +41,15 @@ public class DBPersonDAO implements PersonDAO {
 
     @Override
     public Person getPerson(int id) {
-        Person person = new Person();
+        Person person = null;
         try {
-            Statement statement =  connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM person WHERE id = " + id);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT * FROM person WHERE id=?");
+
+            preparedStatement.setInt(1, id);
+            ResultSet result = preparedStatement.executeQuery();
             if (result.next()) {
+                person = new Person();
                 person.setId(result.getInt("id"));
                 person.setName(result.getString("name"));
                 person.setAge(result.getInt("age"));
@@ -64,12 +65,14 @@ public class DBPersonDAO implements PersonDAO {
     public void save(Person person) {
         person.setId(idGenerator.next());
         try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO person VALUES("
-                    + person.getId() + ", '"
-                    + person.getName() + "', "
-                    + person.getAge() + ", '"
-                    + person.getEmail() + "')");
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("INSERT INTO person VALUES(?, ?, ?, ?)");
+
+            preparedStatement.setInt(1, person.getId());
+            preparedStatement.setString(2, person.getName());
+            preparedStatement.setInt(3, person.getAge());
+            preparedStatement.setString(4, person.getEmail());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -78,11 +81,14 @@ public class DBPersonDAO implements PersonDAO {
     @Override
     public void update(int id, Person person) {
         try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("UPDATE person SET name = " + "'" + person.getName() + "', "
-                    + "age = " + person.getAge() + ", "
-                    + "email = " + "'" + person.getEmail() + "' "
-                    + "WHERE id = " + person.getId());
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("UPDATE person SET name=?, age=?, email=? WHERE id=?");
+
+            preparedStatement.setString(1, person.getName());
+            preparedStatement.setInt(2, person.getAge());
+            preparedStatement.setString(3, person.getEmail());
+            preparedStatement.setInt(4, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -91,8 +97,11 @@ public class DBPersonDAO implements PersonDAO {
     @Override
     public void delete(int id) {
         try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM person WHERE id = " + id);
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM person WHRER id=?");
+
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
