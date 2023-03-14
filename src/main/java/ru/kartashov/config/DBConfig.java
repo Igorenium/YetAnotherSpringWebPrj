@@ -4,24 +4,39 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:SpringWeb.properties")
 public class DBConfig {
 
+    @Value("${datasource.driver.name}")
+    private String driverName;
+
+    @Value("${database.url}")
+    private String url;
+
+    @Value("${database.username}")
+    private String username;
+
+    @Value("${database.password}")
+    private String password;
+
     @Bean
-    public Connection getConnection(@Value("${database.url}") String url,
-                                    @Value("${database.username}") String username,
-                                    @Value("${database.password}") String password) {
-        try {
-            Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection(url, username, password);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+    public DataSource dataSource()  {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(driverName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
+        return dataSource;
+    }
+
+    @Bean
+    public JdbcTemplate jdbcTemplate() {
+        return new JdbcTemplate(dataSource());
     }
 }
